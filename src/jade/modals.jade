@@ -1,0 +1,72 @@
+mixin modalView(idPostfix, applyButton, title)
+  div.modal.fade(id="modal-" + idPostfix)
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button.close(type="button",data-dismiss="modal") &times;
+          h4.modal-title= title
+        block
+        div.modal-footer
+          button.btn.btn-default(type="button",data-dismiss="modal") Cancel
+          button.btn.btn-primary(type="button",data-loading-text="Processing...")= applyButton
+
++modalView('edit-artist', '')
+  div.modal-body
+    div.form-group
+      label Artist name
+      input.form-control(type='text',name="name",placeholder="Artist name")
+
++modalView('edit-release', '')
+  div.modal-body.form-horizontal
+    div.form-group
+      div.col-sm-9
+        label Release title
+        input.form-control(type='text',name="title",placeholder="Title")
+      div.col-sm-3
+        label Year
+        select.form-control(name="year")
+          - for (var y = 1950; y <= (new Date).getFullYear(); ++y)
+            option(value=y)= y
+
++modalView('edit-track', '')
+  div.modal-body.form-horizontal
+    div.form-group
+      div.col-sm-2
+        label No.
+        select.form-control(name="number")
+          - for (var n = 0; n <= 99; ++n)
+            option(value=n)= n
+      div.col-sm-10
+        label Title
+        input.form-control(type='text',name="title",placeholder="Title")
+    div.form-group
+      div.col-sm-2
+        label Min
+        select.form-control(name="minutes")
+          - for (var m = 0; m <= 59; ++m)
+            option(value=m)= m
+      div.col-sm-2
+        label Sec
+        select.form-control(name="seconds")
+          - for (var s = 0; s <= 59; ++s)
+            - var sec = (s < 10 ? "0" : "") + s
+            option(value=sec)= sec
+
++modalView('delete', 'Delete')
+  div.modal-body
+
++modalView('load-sample-data', 'Apply', 'Load sample data')
+  div.modal-body
+    div.alert.alert-warning
+      strong Warning: 
+      | All data will be lost and replaced by sample data. Are you sure?
+
++modalView('clear-data', 'Apply', 'Clear data')
+  div.modal-body
+    div.alert.alert-warning
+      strong Warning: 
+      | All data will be lost. Are you sure?
+
++modalView('startup', 'Load sample data', 'Music database startup')
+  div.modal-body
+    | Database is empty. Do you want to load sample data?

@@ -1,0 +1,61 @@
+// @import "bootstrap"
+$font-size-base: 14px
+$panel-body-padding: 15px
+$padding-small-vertical: 5px
+
+$div-margin: 10px
+$div-header-top: 60px
+$div-header-height: $font-size-base + $panel-body-padding * 2 + $padding-small-vertical
+$div-contents-top: $div-header-top + $div-header-height
+$div-contents-bottom: $div-margin
+
+$artist-left: $div-margin
+$artist-width: 240px
+$release-left: $artist-left + $artist-width + $div-margin
+$release-width: 280px
+$track-left: $release-left + $release-width + $div-margin
+$track-right: $div-margin
+
+body
+  padding-top: $div-header-top
+
+.div-header
+  position: fixed
+  top: $div-header-top
+  height: $div-header-height
+
+.div-contents
+  position: absolute
+  top: $div-contents-top
+  bottom: $div-contents-bottom
+  overflow: auto
+
+.div-artist
+  left: $artist-left
+  width: $artist-width
+
+.div-release
+  left: $release-left
+  width: $release-width
+
+.div-track
+  left: $track-left
+  right: $track-right
+
+.cursor-pointer
+  cursor: pointer
+
+.cursor-wait
+  cursor: wait
+
+.width-max
+  width: 100%
+
+td.tracknumber
+  text-align: right
+  width: 2em
+  padding-right: 1em
+
+td.trackduration
+  text-align: right
+  width: 3.5em

@@ -1,0 +1,20 @@
+div.nav.navbar-default.navbar-fixed-top
+  div.container-fluid
+    a.navbar-brand(href="#") Personal music database
+
+    ul.nav.navbar-nav.navbar-right
+      li.dropdown.cursor-pointer#navbar-menu
+        a.dropdown-toggle(data-toggle='dropdown')
+          | Menu 
+          b.caret
+        ul.dropdown-menu
+          li(action="load-sample-data")
+            a.cursor-pointer
+              | Load sample data
+          li(action="clear-data")
+            a.cursor-pointer
+              | Clear data
+          li.divider
+          li
+            a(href="https://github.com/higuma/",target="_blank")
+              | About this application

@@ -1,0 +1,24 @@
+mixin contents(name)
+  div(class="div-contents div-" + name)
+    ul.nav.nav-pills.nav-stacked(id="list-" + name)
+
+mixin header(name, title)
+  div(class="div-header div-" + name)
+    div.panel.panel-default.dropdown.cursor-pointer
+      div.panel-heading.dropdown-toggle(data-toggle="dropdown")= title + ' '
+        span.caret
+      ul.dropdown-menu(id="menu-" + name)
+        li(action="new")
+          a.cursor-pointer New
+        li(action="edit")
+          a.cursor-pointer Edit
+        li.divider
+        li(action="delete")
+          a.cursor-pointer Delete
+
++contents('artist')
++contents('release')
++contents('track')
++header('artist', 'Artists')
++header('release', 'Releases')
++header('track', 'Tracks')

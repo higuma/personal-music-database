@@ -1,0 +1,22 @@
+script#template-artist(type="text/template")
+  a.cursor-pointer
+    <%= name %>
+
+script#template-release(type="text/template")
+  a.cursor-pointer
+    <%= title + " (" + year + ")" %>
+
+script#template-track(type="text/template")
+  a.cursor-pointer
+    table.width-max
+      tbody.width-max
+        tr.width-max
+          td.tracknumber <%= number %>
+          td <%= title %>
+          td.trackduration <%= "" + minutes + ":" + seconds %>
+
+script#template-validation-error(type="text/template")
+  div.alert.alert-danger.alert-dismissible
+    button.close(type="button", data-dismiss="alert") &times;
+    strong Error: 
+    span <%= validationError %>
