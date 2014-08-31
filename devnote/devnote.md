@@ -7,9 +7,10 @@
 * 元は少し前に作ったもの
     * <https://github.com/higuma/music-database-webapp>
     * サーバサイドAPIはRuby on Railsで作った
+        * RESTful APIを作るのならやっぱりRailsが一番!
     * Railsを使えば作るのは楽だが気楽にはデモ公開できない
-        * もしやるとしたらちゃんと認証
-* これをlocalStorageで作る(これなら気楽に公開できる)
+        * もしやるとしたらちゃんと認証機能なども作らないとだめ
+* 今回はこれをlocalStorageで作る(これなら気楽に公開できる)
 * ビルドツールはgulpを使う(gruntよりよさそう)
 
 最初はgulpのお勉強。Sassのモジュールは2種類ある。
