@@ -310,3 +310,107 @@ setOwnerを呼ぶとその先でfetchを行いonSyncがcallbackされるが、lo
 
 > gulpだとあっという間にできる。gruntではこうはいかないだろう(たぶん今もまだGruntfileをいじっているのでは...)。
 
+------------------------------------------------------------------------
+
+2014-09-07
+
+せっかくbowerを勉強したので、ここに使ってみよう。使い方は次を参照。
+
+http://yosuke-furukawa.hatenablog.com/entry/2013/06/01/173308
+
+* bower initでbower.jsonを作成
+* bower install bootstrap --saveでjQueryとBootstrapをインストール
+
+ここまではOK。残りはbackbone関係だが、次でつまづいた。
+
+* bower install backbone.localStorage --save
+
+ここのbower.jsonに問題があり、依存性が次のように固定されているため古いbackboneがインストールされてしまう。またこの当時のbackboneのbower.jsonは不完全で、underscoreがインストールされない。
+
+    "backbone": "~1.0.0"
+
+backboneは手動で最新をインストールし、依存性はbowerに解決させる。
+
+```
+$ bower install backbone --save
+bower cached        git://github.com/jashkenas/backbone.git#1.1.2
+bower validate      1.1.2 against git://github.com/jashkenas/backbone.git#*
+bower cached        git://github.com/jashkenas/underscore.git#1.7.0
+bower validate      1.7.0 against git://github.com/jashkenas/underscore.git#>=1.5.0
+
+Unable to find a suitable version for backbone, please choose one:
+    1) backbone#~1.0.0 which resolved to 1.0.0 and is required by backbone.localStorage#1.1.13 
+    2) backbone#~1.1.2 which resolved to 1.1.2
+
+Prefix the choice with ! to persist it to bower.json
+
+
+[?] Answer: 2!
+bower resolution    Saved backbone#~1.1.2 as resolution
+bower install       backbone#1.1.2
+bower install       underscore#1.7.0
+
+backbone#1.1.2 bower_components/backbone
+└── underscore#1.7.0
+
+underscore#1.7.0 bower_components/underscore
+```
+
+Bootstrapのサイトを見ると今でもjQueryの推奨バージョンは(2.1.1ではなく)1.11.1なので、これもインストールする。
+
+* bower install jquery#1.11.1 --save
+
+> 次を参照: <http://getbootstrap.com/getting-started/#template>
+
+これでライブラリの取り寄せは終了。ここで.girigoreに`bower_components`を追加しておく。
+さてこれで準備OKと思ったらそうではなかった。bowerで取り寄せたbackboneにはbackbone-min.jsが入っていない。
+
+本来あるべきものなので、これは元を調べないと思いGithub repo(<https://github.com/jashkenas/backbone>)を見たらビルドツール類を使ってないのが分かった。
+
+* どうやらリリースのたびに手動でminifyしているらしい
+* ツールはたぶんuglifyjs(ほぼ間違いない)
+* backbone-min.jsにはCopyrightは残していない
+* でもbackbone-min.jsの最終行にbackbone-min.mapが書いてある
+* 同じディレクトリにbackbone-min.mapが存在する
+
+ということは状況から判断して自分でuglifyjsを使ってminifyしていいということなのだろう。
+
+uglifyjsのオプションは本家repoを参照(末尾に`2`が付いてないのは旧バージョンなので注意)。
+
+<https://github.com/mishoo/UglifyJS2>
+
+色々試した結果、次のオプション設定で完全に一致した。
+
+* uglifyjs -m -o backbone-min.js --source-map backbone-min.map backbone.js
+
+> manglerの設定は単に`-m`とするのが一番よい。`-m sort`を使うと生成ファイルをもう少し小さくできるが、その後gzip圧縮するとほとんどの場合は圧縮後のファイルが逆に大きくなってしまう(ドキュメントより)。
+
+これでやっと全部準備ができた。今回はサイトが十分に安定しているならCDNを利用していいことにする。
+
+* jQueryとBootstrapはCDNを使う(せっかくbowerで降り寄せたけど...まあいいや)
+* Backbone関係はCDNはやめておく
+
+jQueryとBootstrapはBootstrapのサイトに書いてあるのを借用する。
+
+* jQuery - <http://getbootstrap.com/getting-started/#template>
+* Bootstrap - <http://getbootstrap.com/getting-started/#download>
+
+> Backbone関係もCDNを見つけたが、これがこの先もずっと使えるかどうかはちょっと怪しいので今回は採用しない。
+> 
+> * http://cdnjs.com/libraries/underscore.js/
+> * http://cdnjs.com/libraries/backbone.js/
+> * http://cdnjs.com/libraries/backbone-localstorage.js/
+
+Backbone関係はbower_componentsにあるものを(必要に応じ加工して)利用する。
+
+後はgulpfileだけ。uglifyする際renameが必要になるのでpluginを探す。
+
+<http://gulpjs.com/plugins/>
+
+見つけた。
+
+<https://www.npmjs.org/package/gulp-rename/>
+
+これでgulpfileも書ける。すべて対応して終了。
+
+

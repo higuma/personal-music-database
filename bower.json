@@ -1,0 +1,26 @@
+{
+  "name": "personal-music-database",
+  "version": "0.0.1",
+  "homepage": "https://github.com/higuma/personal-music-database",
+  "authors": [
+    "Yuji Miyane <myuj1964@gmail.com>"
+  ],
+  "description": "Personal music database",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "backbone.localStorage": "~1.1.13",
+    "backbone": "~1.1.2",
+    "jquery": "1.11.1"
+  },
+  "resolutions": {
+    "backbone": "~1.1.2"
+  }
+}
