@@ -4,7 +4,7 @@ English | [Japanese](/README.md)
 
 A personal music database web application. Data is stored to the browser's local storage.
 
-* <http://personal-music-database.herokuapp.com/>
+* <http://higuma.github.io/personal-music-database/>
 
 ![Screen shot](screenshot.png)
 

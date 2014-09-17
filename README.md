@@ -4,7 +4,7 @@
 
 個人用音楽データ管理Webアプリケーションです。次のURLで公開しています。データはブラウザのローカル環境にだけ保存されます。外部へアクセスすることはありませんので安心してお使い下さい。
 
-* <http://personal-music-database.herokuapp.com/>
+* <http://higuma.github.io/personal-music-database/>
 
 ![Screen shot](screenshot.png)
 
