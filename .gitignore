@@ -1,5 +1,4 @@
-bower_components
-node_modules
-personal-music-database
+bower_components/
+node_modules/
 .sass-cache
 *.swp

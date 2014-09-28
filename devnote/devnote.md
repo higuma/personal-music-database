@@ -401,7 +401,7 @@ jQueryとBootstrapはBootstrapのサイトに書いてあるのを借用する�
 > * http://cdnjs.com/libraries/backbone.js/
 > * http://cdnjs.com/libraries/backbone-localstorage.js/
 
-Backbone関係はbower_componentsにあるものを(必要に応じ加工して)利用する。
+Backbone関係はbower\_componentsにあるものを(必要に応じ加工して)利用する。
 
 後はgulpfileだけ。uglifyする際renameが必要になるのでpluginを探す。
 
@@ -413,4 +413,7 @@ Backbone関係はbower_componentsにあるものを(必要に応じ加工して)
 
 これでgulpfileも書ける。すべて対応して終了。
 
+------------------------------------------------------------------------
+
+(後で追記) これでv0.1.0リリースで終了とする。今のところは「こういうものも作れます」という程度以上のものは何もない。もし後で他の何かと関連して面白いことができる可能性が見つかったら再開を検討する。
 
